@@ -1,10 +1,15 @@
 import React from 'react';
+import List from './pages/ListPage';
+import { MantineProvider } from '@mantine/core';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <MantineProvider theme={{ 
+      // fontFamily: 'Open Sans',
+      colorScheme: 'dark',
+       }} withGlobalStyles withNormalizeCSS>
+        <List />
+    </MantineProvider>
   );
 }
 
