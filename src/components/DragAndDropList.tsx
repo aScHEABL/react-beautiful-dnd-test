@@ -5,6 +5,7 @@ import { BsGripVertical } from "react-icons/bs";
 
 const useStyles = createStyles((theme) => ({
   item: {
+    width: 'rem(200)',
     display: 'flex',
     alignItems: 'center',
     borderRadius: theme.radius.md,
@@ -22,9 +23,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   symbol: {
-    fontSize: rem(30),
+    fontSize: rem(20),
     fontWeight: 700,
-    width: rem(60),
   },
 
   dragHandle: {
@@ -41,10 +41,9 @@ const useStyles = createStyles((theme) => ({
 
 interface DndListHandleProps {
   data: {
-    position: number;
-    mass: number;
-    symbol: string;
-    name: string;
+    id: string;
+    title: string;
+    content: string;
   }[];
 }
 
@@ -53,7 +52,7 @@ export function DndListHandle({ data }: DndListHandleProps) {
   const [state, handlers] = useListState(data);
 
   const items = state.map((item, index) => (
-    <Draggable key={item.symbol} index={index} draggableId={item.symbol}>
+    <Draggable key={item.id} index={index} draggableId={item.id}>
       {(provided, snapshot) => (
         <div
           className={cx(classes.item, { [classes.itemDragging]: snapshot.isDragging })}
@@ -63,12 +62,12 @@ export function DndListHandle({ data }: DndListHandleProps) {
           <div {...provided.dragHandleProps} className={classes.dragHandle}>
             <BsGripVertical size="1.05rem" />
           </div>
-          <Text className={classes.symbol}>{item.symbol}</Text>
+          <Text className={classes.symbol}>{item.title}</Text>
           <div>
-            <Text>{item.name}</Text>
-            <Text color="dimmed" size="sm">
+            <Text>{item.content}</Text>
+            {/* <Text color="dimmed" size="sm">
               Position: {item.position} • Mass: {item.mass}
-            </Text>
+            </Text> */}
           </div>
         </div>
       )}
